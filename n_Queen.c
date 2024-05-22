@@ -1,58 +1,38 @@
-#define N 4
-#include <stdbool.h>
-#include <stdio.h>
-void printSolution(int board[N][N]){
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if(board[i][j])
-                printf("Q ");
-            else
-                printf(". ");
-        }
-        printf("\n");
-    }
-}
-bool isSafe(int board[N][N], int row, int col){
-    int i, j;
-    for (i = 0; i < col; i++)
-        if (board[row][i])
+#include<stdio.h>
+#include<math.h>
+#include<stdbool.h>
+#include<stdlib.h>
+int *x;
+bool place(int k,int i){ 
+	int j;
+	for(j=0;j<k;j++){      
+          if(x[j]==i||abs(x[j]-i)==abs(j-k)){
             return false;
-    for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-        if (board[i][j])
-            return false;
-    for (i = row, j = col; j >= 0 && i < N; i++, j--)
-        if (board[i][j])
-            return false;
-    return true;
+    	}
+      }
+      return true;	
 }
-bool solveNQUtil(int board[N][N], int col){
-    if (col >= N)
-        return true;
-    for (int i = 0; i < N; i++) {
-        if (isSafe(board, i, col)) {
-            board[i][col] = 1;
-            if (solveNQUtil(board, col + 1))
-                return true;
-            board[i][col] = 0; // BACKTRACK
-        }
-    }
-    return false;
+void  Nqueens(int k,int n){   
+	int i,j;
+	for(i=0;i<n;i++){   
+        if(place(k,i)){  
+            x[k]=i;   
+			if(k==n-1){
+               for(j=0;j<n;j++){
+               		printf("%d ",x[j]+1);
+			   } 
+			   printf("\n");
+			}else{
+		   		Nqueens(k+1,n);       
+            }
+        } 
+	}
 }
-bool solveNQ()
-{
-    int board[N][N] = { { 0, 0, 0, 0 },
-                        { 0, 0, 0, 0 },
-                        { 0, 0, 0, 0 },
-                        { 0, 0, 0, 0 } };
-    if (solveNQUtil(board, 0) == false) {
-        printf("Solution does not exist");
-        return false;
-    }
-    printSolution(board);
-    return true;
-}
-int main()
-{
-    solveNQ();
-    return 0;
+int main(void){
+	int n;
+	printf("Enter no of Queen:");
+	scanf("%d",&n);
+	x=(int *)malloc(n*sizeof(int));
+	Nqueens(0,n);
+	return 0;
 }
