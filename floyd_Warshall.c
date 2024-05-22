@@ -10,7 +10,6 @@ void printSolution(int D[][V],int P[][V]){
 		}
 		printf("\n");
 	}
-	
 	printf("Predecessor Matrix for shortest path:\n");
 	for(i=0;i<V;i++){
 		for(j=0;j<V;j++){
@@ -28,10 +27,12 @@ void floyedWarshall(int W[][V]){
 			P[i][j]=0;
 		}
 	}
-	for(k=0;k<V;k++){
-		for(i=0;i<V;i++){
-			for(j=0;j<V;j++){
-				if(abs(D[i][j])>abs(D[i][k]+D[k][j])){
+	
+	for(k=0;k<V;k++){           // k=1
+		for(i=0;i<V;i++){       // i=2
+			for(j=0;j<V;j++){   // j=1 
+				
+				if(D[i][k]!=INT_MAX  && D[k][j] !=INT_MAX && D[i][j]>D[i][k]+D[k][j]){
 					D[i][j]=D[i][k]+D[k][j];
 					P[i][j]=k+1;
 				}			
@@ -41,14 +42,15 @@ void floyedWarshall(int W[][V]){
 	printSolution(D,P);
 }		
 int main(void){
-	FILE *file=fopen("adjacency.txt","r");  
-	int i,j,s;	
+	FILE *file=fopen("adjacency1.txt","r");  
+	int i,j,s;
 	if(file==NULL){
 		printf("Error in opening file !!!");
 		exit(0);
 	}
     fscanf(file, "%d", &V);
 	int G[V][V];
+	
 	for(i=0;i<V;i++){
 		for(j=0;j<V;j++){
 			if(fscanf(file,"%d",&G[i][j])!=1){
