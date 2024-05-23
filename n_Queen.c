@@ -17,15 +17,15 @@ void  Nqueens(int k,int n){
 	for(i=0;i<n;i++){   
         if(place(k,i)){  
             x[k]=i;   
-			if(k==n-1){
-               for(j=0;j<n;j++){
-               		printf("%d ",x[j]+1);
-			   } 
-			   printf("\n");
-			}else{
-		   		Nqueens(k+1,n);       
-            }
-        } 
+	if(k==n-1){
+            for(j=0;j<n;j++){
+                printf("%d ",x[j]+1);
+		} 
+		printf("\n");
+		}else{
+		 Nqueens(k+1,n);       
+           	}
+     	    } 
 	}
 }
 int main(void){
