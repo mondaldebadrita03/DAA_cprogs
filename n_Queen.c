@@ -22,11 +22,11 @@ void  Nqueens(int k,int n){
                 printf("%d ",x[j]+1);
 		} 
 		printf("\n");
-		}else{
-		 Nqueens(k+1,n);       
-           	}
-     	    } 
-	}
+	}else{
+	    Nqueens(k+1,n);       
+             }
+     	 } 
+    }
 }
 int main(void){
 	int n;
