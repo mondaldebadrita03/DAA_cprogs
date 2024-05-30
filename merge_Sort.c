@@ -16,7 +16,7 @@ void merge(int arr[],int lb,int mid, int ub){
     while(i<=mid){
         mer[k++]=arr[i++];
     }
-    while(j<=mid){
+    while(j<=ub){
         mer[k++]=arr[j++];
     }
     for(int x=0; x<ub-lb+1; x++){
